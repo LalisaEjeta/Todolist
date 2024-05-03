@@ -9,17 +9,19 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="border justify-content-center p-5" style="max-width: 600px;">
-        <h1 class="text-center">To-Do List</h1>
-        <div class="d-flex justify-content-center">
-            <input type="text" class="mx-2" id="input" placeholder="Input task">
-            <button id="add" class="btn-primary">Add task</button>
+<body class="p-3">
+    <div class="container d-flex justify-content-center" style="max-width: 600px;">
+        <div class="border justify-content-center p-5">
+            <h1 class="text-center">To-Do List</h1>
+            <div class="d-flex justify-content-center">
+                <input type="text" class="mx-2" id="input" placeholder="Input task">
+                <button id="add" class="btn-primary">Add task</button>
+            </div>
+            <div id="tasks"></div>
         </div>
-        <div id="tasks"></div>
     </div>
 
-    
+
 
     <!-- Link Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -56,7 +58,7 @@
             deleting.className = "btn-danger"
             btns.appendChild(deleting)
 
-            deleting.addEventListener("click",function(){
+            deleting.addEventListener("click", function () {
                 container.remove();
             });
 
