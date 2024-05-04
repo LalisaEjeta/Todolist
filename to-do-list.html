@@ -31,41 +31,52 @@
         const input = document.getElementById("input");
         const add = document.getElementById("add");
         const tasks = document.getElementById("tasks");
-
-
+    
         add.addEventListener("click", function () {
-
             const container = document.createElement("div");
             container.className = "d-flex justify-content-between mt-3 border p-2";
             tasks.appendChild(container)
-
+    
+            if (input.value === "") {
+                alert("Please enter task")
+                return;
+            }
+    
             const task = document.createElement("h4");
-            task.innerText = input.value
-            container.appendChild(task)
-
+            task.innerText = input.value;
+            container.appendChild(task);
+    
             // Buttons
             const btns = document.createElement("div");
-            btns.className = "d-flex"
-            container.appendChild(btns)
-
+            btns.className = "d-flex";
+            container.appendChild(btns);
+    
             const update = document.createElement("button");
-            update.innerText = "Update"
-            update.className = "btn-success mx-2"
-            btns.appendChild(update)
-
+            update.innerText = "Update";
+            update.className = "btn-success mx-2";
+            btns.appendChild(update);
+    
             const deleting = document.createElement("button");
-            deleting.innerText = "Delete"
-            deleting.className = "btn-danger"
-            btns.appendChild(deleting)
-
+            deleting.innerText = "Delete";
+            deleting.className = "btn-danger";
+            btns.appendChild(deleting);
+    
             deleting.addEventListener("click", function () {
                 container.remove();
             });
-
-
-            input.value = ""
+    
+            // Update task functionality
+            update.addEventListener("click", function () {
+                const newTask = prompt("Enter updated task:", task.innerText);
+                if (newTask !== null && newTask.trim() !== "") {
+                    task.innerText = newTask;
+                }
+            });
+    
+            input.value = "";
         });
     </script>
+    
 
 
 </body>
