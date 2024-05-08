@@ -7,11 +7,19 @@
     <title>Close card</title>
     <!-- Link Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .doneTask {
+            text-decoration: line-through;
+        }
+        body {
+            background-image: url('./assest/background.png');
+        }
+    </style>
 </head>
 
 <body class="p-3">
     <div class="container d-flex justify-content-center" style="max-width: 600px;">
-        <div class="border justify-content-center p-5">
+        <div class="border justify-content-center p-5 bg-warning">
             <h1 class="text-center">To-Do List</h1>
             <div class="d-flex justify-content-center">
                 <input type="text" class="mx-2" id="input" placeholder="Input task">
@@ -21,8 +29,6 @@
         </div>
     </div>
 
-
-
     <!-- Link Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -31,40 +37,59 @@
         const input = document.getElementById("input");
         const add = document.getElementById("add");
         const tasks = document.getElementById("tasks");
-    
+
         add.addEventListener("click", function () {
             const container = document.createElement("div");
             container.className = "d-flex justify-content-between mt-3 border p-2";
             tasks.appendChild(container)
-    
+
             if (input.value === "") {
                 alert("Please enter task")
                 return;
             }
-    
+
+            const first = document.createElement("div");
+            first.className = "d-flex justify-content-between"
+            container.appendChild(first);
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "taskRadio"; // Set the name attribute to group radio buttons
+            radio.className = "task-radio";
+            first.appendChild(radio)
+
             const task = document.createElement("h4");
             task.innerText = input.value;
-            container.appendChild(task);
-    
+            first.appendChild(task);
+
             // Buttons
             const btns = document.createElement("div");
             btns.className = "d-flex";
             container.appendChild(btns);
-    
+
             const update = document.createElement("button");
             update.innerText = "Update";
             update.className = "btn-success mx-2";
             btns.appendChild(update);
-    
+
             const deleting = document.createElement("button");
             deleting.innerText = "Delete";
             deleting.className = "btn-danger";
             btns.appendChild(deleting);
-    
+
+            // Add event listener to the radio button for highlighting the task
+            radio.addEventListener("change", function () {
+                if (radio.checked) {
+                    task.classList.add('doneTask');
+                    radio.classList.add('d-none');
+                } else {
+                    task.classList.remove('underlined');
+                }
+            });
+
             deleting.addEventListener("click", function () {
                 container.remove();
             });
-    
+
             // Update task functionality
             update.addEventListener("click", function () {
                 const newTask = prompt("Enter updated task:", task.innerText);
@@ -72,13 +97,10 @@
                     task.innerText = newTask;
                 }
             });
-    
+
             input.value = "";
         });
     </script>
-    
-
-
 </body>
 
 </html>
